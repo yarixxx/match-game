@@ -4,21 +4,22 @@
     <meta charset="utf-8">
     <title>Match Game</title>
     <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   </head>
 
   <body>
     <header>
       <h1>Find Match</h1>
     </header>
-    <main id="screenContainer">
-      <div id="startScreen" class="start-game-screen screen-active">
+    <main id="screenContainer" class="screen-container">
+      <div id="startScreen" class="screen screen-active">
         <button id="startGameButton" class="start-game-button">Start Game</button>
       </div>
-      <div id="cardsScreen" class="cards-screen">
+      <div id="cardsScreen" class="screen">
         <div id="cardsRows" class="cards-rows">
         </div>
       </div>
-      <div id="gameOverScreen">
+      <div id="gameOverScreen" class="screen">
         <p>Game Over</p>
       </div>
     </main>

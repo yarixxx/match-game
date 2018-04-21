@@ -1,18 +1,5 @@
-.start-game-screen {
-    border: 1px solid black;
-    width: 800px;
-    height: 400px;
-    display: none;
-}
-
-.start-game-screen .start-game-button {
-    margin: auto;
-}
-
-.cards-screen {
-    border: 1px solid black;
-    width: 800px;
-    height: 400px;
+.screen {
+    min-height: 400px;
     display: none;
 }
 
@@ -20,11 +7,23 @@
     display: block;
 }
 
+.start-game-screen .start-game-button {
+    margin: auto;
+}
+
+
 .card {
     border: 1px solid black;
-    width: 100%;
-    height: 100%;
     cursor: pointer;
+    text-align: center;
+    width: 15%;
+    height: 100px;
+    padding-top: 10px;
+
+}
+
+.card .material-icons {
+    font-size: 60pt;
 }
 
 .card:hover {
@@ -36,14 +35,13 @@
 }
 
 .cards-rows {
-    height: 100%;
     align-content: stretch;
     display: flex;
-    flex-direction: column;   
+    flex-direction: row;
+    flex-wrap: wrap
 }
 
-.cards-row {
-    align-content: stretch;
-    display: flex;
-    height: 100%;
+.screen-container {
+    width: 90%;
+    margin: auto;
 }

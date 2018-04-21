@@ -1,9 +1,50 @@
+const ALL_CARDS = [
+'event_seat','event_seat',
+'pets','pets',
+'settings_input_hdmi','settings_input_hdmi',
+'settings_input_svideo','settings_input_svideo',
+'settings_bluetooth','settings_bluetooth',
+'power','power',
+'dvr','dvr',
+'nfc','nfc',
+'usb','usb',
+'highlight','highlight',
+'network_wifi','network_wifi',
+'sd_storage','sd_storage'];
+
+class Card {
+    constructor(index, value, callback) {
+        this.index = index;
+        this.value = value;
+        this.isOpen = false;
+        this.element = document.createElement('div');
+        this.element.classList.add('card');
+        this.element.id = `i${index}`;
+        this.element.innerHTML = '<i class="material-icons">help</i>';
+        this.element.addEventListener('click', () => {
+            callback(this);
+        });
+    }
+
+    open() {
+        this.isOpen = true;
+        this.element.classList.add('open');
+        this.element.innerHTML = `<i class="material-icons">${this.value}</i>`;
+    }
+
+    close() {
+        this.isOpen = false;
+        this.element.classList.remove('open');
+        this.element.innerHTML = '<i class="material-icons">help</i>';
+    }
+}
+
 class MatchGame {
     constructor() {
+        this.allCards = [];
         this.remaining = 12;
-        this.availableCards = ['1','1','2','2','3','3','4','4','5','5','6','6','7','7','8','8','9','9','10','10','11','11','12','12'];
-        this.allCards = {};
-        this.selectedElements = [];
+        this.availableCards = [];
+        this.selectedCards = [];
         this.cardsScreen = document.getElementById('cardsScreen');
         this.startScreen = document.getElementById('startScreen');
         this.cardsRows = document.getElementById('cardsRows');
@@ -11,77 +52,70 @@ class MatchGame {
         this.startButton.addEventListener('click', () => {
             this.startGame();
         });
-        this.cardsRows.addEventListener('click', (e) => {
-            this.checkCards(e.target);
+    }
+
+    initializeCards() {
+        ALL_CARDS.forEach((value, i) => {
+            const card = new Card(i, value, (card) => {
+                this.checkCard(card);
+            });
+            this.allCards.push(card);
+            this.cardsRows.appendChild(card.element);
         });
+        this.shuffleCards();
     }
 
-    shuffleCards() {
-        for (let i = 0; i < 4; i++) {
-            const row = this.createRow();
-            for (let j = 0; j < 6; j++) {
-                this.allCards[`id${i}${j}`] = this.availableCards.pop();                
+    shuffleCards() {}
+
+    getCardIndex(element) {
+        if (element && element.id) {
+            const pair = element.id.split('i');
+            if (pair.length == 2) {
+                return pair[1];
             }
         }
+        throw Error(`Invalid element id '${element.id}'`);
     }
 
-    checkCards(card) {
-        if (card.classList.contains('open')) { return; }
-        if (this.selectedElements.length < 2) {
-            card.classList.add('open');
-            card.textContent = this.allCards[card.id];
-            this.selectedElements.push(card);
-            if (this.selectedElements.length === 2) {
-                if (this.allCards[this.selectedElements[0].id] === this.allCards[this.selectedElements[1].id]) {
-                    this.selectedElements = [];
-                    this.remaining--;
-                    if (this.remaining == 0) {
-                        alert('Win!');
-                    }
-                }
+    checkCard(card) {
+        if (card.isOpen) { return }
+
+        if (this.selectedCards.length === 0) {
+            card.open();
+            this.selectedCards.push(card);
+            return;
+        }
+        if (this.selectedCards.length === 1) {
+            card.open();
+            this.selectedCards.push(card);
+        }
+
+        if (this.selectedCards[0].value === this.selectedCards[1].value) {
+            this.selectedCards = [];
+            this.remaining--;
+            if (this.remaining == 0) {
+                alert('Win!');
             }
         }
-        if (this.selectedElements.length === 2) {
-            setTimeout(() => { this.resetOpenCards() }, 1000);
+        if (this.selectedCards.length === 2) {
+            setTimeout(() => {
+                this.resetOpenCards()
+            }, 1000);
         }   
     }
 
     resetOpenCards() {
-        this.selectedElements.forEach((card) => {
-            card.classList.remove('open');
-            card.textContent = '';
+        this.selectedCards.forEach((card) => {
+            card.close();
         });
-        this.selectedElements = [];
+        this.selectedCards = [];
     }
 
     startGame() {
+        this.initializeCards();
         this.shuffleCards();
         this.startScreen.classList.remove('screen-active');
         this.cardsScreen.classList.add('screen-active');
-        this.createCards();
-    }
-
-    createCards() {
-        for (let i = 0; i < 4; i++) {
-            const row = this.createRow();
-            for (let j = 0; j < 6; j++) {
-                row.appendChild(this.createCard(`id${i}${j}`));                
-            }
-            this.cardsRows.appendChild(row);  
-        }
-    }
-
-    createRow() {
-        const row = document.createElement('div');
-        row.classList.add('cards-row');
-        return row;    
-    }
-
-    createCard(value) {
-        const card = document.createElement('div');
-        card.classList.add('card');
-        card.id = value;
-        return card;
     }
 }
 
