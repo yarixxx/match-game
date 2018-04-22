@@ -5,18 +5,22 @@
     <title>Match Game</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.css" />
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   </head>
 
   <body>
-    <header>
-      <h1>Find Match</h1>
-    </header>
-    <main id="screenContainer" class="screen-container">
-      <div id="startScreen" class="screen screen-active">
-        <button id="startGameButton" class="start-game-button">Start Game</button>
+    <div class="container center">
+        <h1 class="class="header center teal-text text-lighten-2"">Find Match</h1>
+    </div>
+    <main id="screenContainer" class="screen-container container center">
+      <div id="startScreen" class="container screen screen-active row center">
+        <p class="flow-text">Find matching icons!</p>
+        <a id="startGameButton" class="btn-large">Start Game</a>
       </div>
-      <div id="cardsScreen" class="screen">
-        <div id="cardsRows" class="cards-rows">
+      <div id="cardsScreen" class="screen card z-depth-4">
+        <div id="cardsRows" class="row center">
         </div>
       </div>
       <div id="gameOverScreen" class="screen">

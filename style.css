@@ -1,47 +1,16 @@
 .screen {
-    min-height: 400px;
     display: none;
 }
 
 .screen-active {
     display: block;
-}
-
-.start-game-screen .start-game-button {
-    margin: auto;
-}
-
+}   
 
 .card {
-    border: 1px solid black;
     cursor: pointer;
-    text-align: center;
-    width: 15%;
-    height: 100px;
-    padding-top: 10px;
-
 }
 
-.card .material-icons {
-    font-size: 60pt;
+.match-button.btn-floating {
+    margin: 20px;
 }
 
-.card:hover {
-    background: #ddd;
-}
-
-.card.open {
-    background: #eee;
-}
-
-.cards-rows {
-    align-content: stretch;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap
-}
-
-.screen-container {
-    width: 90%;
-    margin: auto;
-}

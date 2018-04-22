@@ -1,3 +1,4 @@
+const DEFAULT_ICON = 'help';
 const ALL_CARDS = [
 'event_seat','event_seat',
 'pets','pets',
@@ -18,9 +19,12 @@ class Card {
         this.value = value;
         this.isOpen = false;
         this.element = document.createElement('div');
-        this.element.classList.add('card');
+        this.element.classList.add('darken-3');
+        this.element.classList.add('btn-large');
+        this.element.classList.add('match-button');
+        this.element.classList.add('btn-floating');
         this.element.id = `i${index}`;
-        this.element.innerHTML = '<i class="material-icons">help</i>';
+        this.element.innerHTML = `<i class="material-icons">${DEFAULT_ICON}</i>`;
         this.element.addEventListener('click', () => {
             callback(this);
         });
@@ -29,13 +33,19 @@ class Card {
     open() {
         this.isOpen = true;
         this.element.classList.add('open');
+        this.element.classList.add('pulse');
         this.element.innerHTML = `<i class="material-icons">${this.value}</i>`;
     }
 
     close() {
         this.isOpen = false;
         this.element.classList.remove('open');
-        this.element.innerHTML = '<i class="material-icons">help</i>';
+        this.element.classList.remove('pulse');
+        this.element.innerHTML = `<i class="material-icons">${DEFAULT_ICON}</i>`;
+    }
+
+    fix() {
+        this.element.classList.remove('pulse');
     }
 }
 
@@ -91,6 +101,8 @@ class MatchGame {
         }
 
         if (this.selectedCards[0].value === this.selectedCards[1].value) {
+            this.selectedCards[0].fix();
+            this.selectedCards[1].fix();
             this.selectedCards = [];
             this.remaining--;
             if (this.remaining == 0) {
