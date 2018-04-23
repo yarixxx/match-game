@@ -1,16 +1,12 @@
 .screen {
     display: none;
+    padding: 20px;
 }
 
 .screen-active {
     display: block;
 }   
 
-.card {
-    cursor: pointer;
-}
-
 .match-button.btn-floating {
     margin: 20px;
 }
-
