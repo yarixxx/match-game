@@ -3,7 +3,7 @@ const DEFAULT_ICON = 'help';
 const ALL_CARDS = [
 'event_seat','event_seat',
 'pets','pets',
-/* 'settings_input_hdmi','settings_input_hdmi',
+'settings_input_hdmi','settings_input_hdmi',
 'settings_input_svideo','settings_input_svideo',
 'settings_bluetooth','settings_bluetooth',
 'power','power',
@@ -11,7 +11,7 @@ const ALL_CARDS = [
 'nfc','nfc',
 'usb','usb',
 'highlight','highlight',
-'network_wifi','network_wifi', */
+'network_wifi','network_wifi',
 'sd_storage','sd_storage'];
 
 class Card {
