@@ -25,15 +25,24 @@ class Cards {
             this.cardsRows.appendChild(card.buttonElement);
         });
         this.remaining = this.allCards.length;
+        this.shuffleCards();
     }
 
     closeCards(cards) {
         cards.forEach((card) => card.close());
     }
 
+    shuffleCards() {
+        const children = this.cardsRows.children;
+        for (let i = 0; i < children.length; i++) {
+            this.cardsRows.appendChild(children[Math.random() * i | 0]);
+        }
+    }
+
     resetAllCards() {
         this.remaining = this.allCards.length;
         this.allCards.forEach((card) => card.reset());
+        this.shuffleCards();
     }
 
     resetOpenCards() {
