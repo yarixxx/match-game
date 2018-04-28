@@ -5,11 +5,11 @@ class Card {
      * Matching card.
      * @constructor
      */
-    constructor(index, value, callback) {
+    constructor(dom, index, value, callback) {
         this.index = index;
         this.value = value;
         this.isOpen = false;
-        const element = document.createElement('div');
+        const element = dom.createElement('div');
         element.innerHTML = `
     <div class="darken-3 btn-large match-button btn-floating"
          id="i${index}">

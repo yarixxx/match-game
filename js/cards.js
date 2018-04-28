@@ -20,7 +20,7 @@ class Cards {
         this.selectedCards = [];
         this.cardsRows = document.getElementById('cardsRows');
         ALL_CARDS.forEach((value, i) => {
-            const card = new Card(i, value, (card) => this.selectCard(card));
+            const card = new Card(document, i, value, (card) => this.selectCard(card));
             this.allCards.push(card);
             this.cardsRows.appendChild(card.buttonElement);
         });
